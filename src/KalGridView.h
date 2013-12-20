@@ -5,6 +5,11 @@
 
 #import <UIKit/UIKit.h>
 
+typedef enum {
+    KalSelectionModeSingle = 0,
+    KalSelectionModeRange,
+} KalSelectionMode;
+
 @class KalTileView, KalMonthView, KalLogic, KalDate;
 @protocol KalViewDelegate;
 
@@ -24,13 +29,11 @@
   KalLogic *logic;
   KalMonthView *frontMonthView;
   KalMonthView *backMonthView;
-  KalTileView *selectedTile;
-  KalTileView *highlightedTile;
-  BOOL transitioning;
 }
 
-@property (nonatomic, readonly) BOOL transitioning;
-@property (nonatomic, readonly) KalDate *selectedDate;
+@property (nonatomic, assign) BOOL transitioning;
+@property (unsafe_unretained, nonatomic, readonly) KalDate *selectedDate;
+@property (nonatomic, assign) KalSelectionMode selectionMode;
 
 - (id)initWithFrame:(CGRect)frame logic:(KalLogic *)logic delegate:(id<KalViewDelegate>)delegate;
 - (void)selectDate:(KalDate *)date;

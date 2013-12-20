@@ -41,15 +41,13 @@
 {
   UILabel *headerTitleLabel;
   KalGridView *gridView;
-  UITableView *tableView;
   UIImageView *shadowView;
-  id<KalViewDelegate> delegate;
   KalLogic *logic;
 }
 
-@property (nonatomic, assign) id<KalViewDelegate> delegate;
-@property (nonatomic, readonly) UITableView *tableView;
-@property (nonatomic, readonly) KalDate *selectedDate;
+@property (nonatomic, weak) id<KalViewDelegate> delegate;
+@property (nonatomic, strong) UITableView *tableView;
+@property (nonatomic, strong) KalDate *selectedDate;
 
 - (id)initWithFrame:(CGRect)frame delegate:(id<KalViewDelegate>)delegate logic:(KalLogic *)logic;
 - (BOOL)isSliding;
@@ -71,8 +69,11 @@
 
 @protocol KalViewDelegate
 
+@optional
+
 - (void)showPreviousMonth;
 - (void)showFollowingMonth;
 - (void)didSelectDate:(KalDate *)date;
+- (void)didSelectFirstDate:(KalDate *)date lastDate:(KalDate *)date;
 
 @end
