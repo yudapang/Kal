@@ -118,8 +118,8 @@ extern const CGSize kTileSize;
 
 - (void)setSelected:(BOOL)selected
 {
-//  if (flags.selected == selected)
-//    return;
+  if (flags.selected == selected)
+    return;
 
   // workaround since I cannot draw outside of the frame in drawRect:
   if (![self isToday]) {

@@ -83,8 +83,6 @@ extern const CGSize kTileSize;
       break;
     }
   }
-  NSAssert1(tile != nil, @"Failed to find corresponding tile for date %@", date);
-  
   return tile;
 }
 
