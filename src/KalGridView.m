@@ -74,7 +74,6 @@ static NSString *kSlideAnimationId = @"KalSwitchMonths";
     int dayCount = [NSDate dayBetweenStartDate:[realBeginDate NSDate] endDate:[realEndDate NSDate]];
     for (int i=1; i<dayCount; i++) {
         NSDate *nextDay = [[realBeginDate NSDate] offsetDay:i];
-        NSLog(@"highlighted %@", [NSDate stringFromDate:nextDay format:nil]);
         KalTileView *nextTile = [frontMonthView tileForDate:[KalDate dateFromNSDate:nextDay]];
         if (nextTile) {
             nextTile.highlighted = YES;

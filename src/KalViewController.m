@@ -57,6 +57,8 @@ NSString *const KalDataSourceChangedNotification = @"KalDataSourceChangedNotific
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(significantTimeChangeOccurred) name:UIApplicationSignificantTimeChangeNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadData) name:KalDataSourceChangedNotification object:nil];
       self.selectionMode = KalSelectionModeSingle;
+      if ([self respondsToSelector:@selector(setEdgesForExtendedLayout:)])
+          self.edgesForExtendedLayout = UIRectEdgeNone;
   }
   return self;
 }
