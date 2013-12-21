@@ -11,6 +11,7 @@ typedef enum {
     KalTileTypeToday     = 1 << 1,
     KalTileTypeFirst     = 1 << 2,
     KalTileTypeLast      = 1 << 3,
+    KalTileTypeDisable   = 1 << 4,
 } KalTileType;
 
 @class KalDate;
@@ -36,6 +37,7 @@ typedef enum {
 - (BOOL)isToday;
 - (BOOL)isFirst;
 - (BOOL)isLast;
+- (BOOL)isDisable;
 - (BOOL)belongsToAdjacentMonth;
 
 @end

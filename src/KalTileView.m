@@ -55,10 +55,14 @@ extern const CGSize kTileSize;
     textColor = [UIColor whiteColor];
     shadowColor = [UIColor blackColor];
     markerImage = [UIImage imageNamed:@"Kal.bundle/kal_marker_selected.png"];
-  } else if (self.belongsToAdjacentMonth) {
-    textColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"Kal.bundle/kal_tile_dim_text_fill.png"]];
-    shadowColor = nil;
+  } else if (self.isDisable) {
+      textColor = [UIColor whiteColor];
+      shadowColor = [UIColor grayColor];
     markerImage = [UIImage imageNamed:@"Kal.bundle/kal_marker_dim.png"];
+  } else if (self.belongsToAdjacentMonth) {
+      textColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"Kal.bundle/kal_tile_dim_text_fill.png"]];
+      shadowColor = nil;
+      markerImage = [UIImage imageNamed:@"Kal.bundle/kal_marker_dim.png"];
   } else {
     textColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"Kal.bundle/kal_tile_text_fill.png"]];
     shadowColor = [UIColor whiteColor];
@@ -189,6 +193,8 @@ extern const CGSize kTileSize;
 - (BOOL)isFirst { return self.type & KalTileTypeFirst; }
 
 - (BOOL)isLast { return self.type & KalTileTypeLast; }
+
+- (BOOL)isDisable { return self.type & KalTileTypeDisable; }
 
 - (BOOL)belongsToAdjacentMonth { return self.type & KalTileTypeAdjacent; }
 
