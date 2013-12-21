@@ -4,8 +4,9 @@
  */
 
 #import <UIKit/UIKit.h>
+#import "KalGridView.h"
 
-@class KalGridView, KalLogic, KalDate;
+@class KalLogic, KalDate;
 @protocol KalViewDelegate, KalDataSourceCallbacks;
 
 /*
@@ -40,7 +41,6 @@
 @interface KalView : UIView
 {
   UILabel *headerTitleLabel;
-  KalGridView *gridView;
   UIImageView *shadowView;
   KalLogic *logic;
 }
@@ -48,6 +48,7 @@
 @property (nonatomic, weak) id<KalViewDelegate> delegate;
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) KalDate *selectedDate;
+@property (nonatomic, strong) KalGridView *gridView;
 
 - (id)initWithFrame:(CGRect)frame delegate:(id<KalViewDelegate>)delegate logic:(KalLogic *)logic;
 - (BOOL)isSliding;

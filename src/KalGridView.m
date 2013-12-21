@@ -188,6 +188,9 @@ static NSString *kSlideAnimationId = @"KalSwitchMonths";
 
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
 {
+    if (self.selectionMode == KalSelectionModeSingle)
+        return;
+    
     UITouch *touch = [touches anyObject];
     CGPoint location = [touch locationInView:self];
     UIView *hitView = [self hitTest:location withEvent:event];
@@ -219,18 +222,21 @@ static NSString *kSlideAnimationId = @"KalSwitchMonths";
     
     if ([hitView isKindOfClass:[KalTileView class]]) {
         KalTileView *tile = (KalTileView*)hitView;
-        if (tile.isFirst || tile.isLast) {
+        if ((self.selectionMode == KalSelectionModeSingle && tile.belongsToAdjacentMonth) ||
+            (self.selectionMode == KalSelectionModeRange && (tile.isFirst || tile.isLast))) {
             if ([tile.date compare:[KalDate dateFromNSDate:logic.baseDate]] == NSOrderedDescending) {
                 [delegate showFollowingMonth];
             } else {
                 [delegate showPreviousMonth];
             }
         }
-        KalDate *endDate = tile.date;
-        if ([tile.date compare:self.beginDate] == NSOrderedSame) {
-            endDate = [KalDate dateFromNSDate:[[endDate NSDate] offsetDay:1]];
+        if (self.selectionMode == KalSelectionModeRange) {
+            KalDate *endDate = tile.date;
+            if ([tile.date compare:self.beginDate] == NSOrderedSame) {
+                endDate = [KalDate dateFromNSDate:[[endDate NSDate] offsetDay:1]];
+            }
+            self.endDate = endDate;
         }
-        self.endDate = endDate;
     }
 }
 

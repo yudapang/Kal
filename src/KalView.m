@@ -9,9 +9,11 @@
 #import "KalPrivate.h"
 
 @interface KalView ()
+
 - (void)addSubviewsToHeaderView:(UIView *)headerView;
 - (void)addSubviewsToContentView:(UIView *)contentView;
 - (void)setHeaderTitleText:(NSString *)text;
+
 @end
 
 static const CGFloat kHeaderHeight = 44.f;
@@ -50,18 +52,18 @@ static const CGFloat kMonthLabelHeight = 17.f;
 
 - (void)redrawEntireMonth { [self jumpToSelectedMonth]; }
 
-- (void)slideDown { [gridView slideDown]; }
-- (void)slideUp { [gridView slideUp]; }
+- (void)slideDown { [self.gridView slideDown]; }
+- (void)slideUp { [self.gridView slideUp]; }
 
 - (void)showPreviousMonth
 {
-  if (!gridView.transitioning)
+  if (!self.gridView.transitioning)
     [self.delegate showPreviousMonth];
 }
 
 - (void)showFollowingMonth
 {
-  if (!gridView.transitioning)
+  if (!self.gridView.transitioning)
     [self.delegate showFollowingMonth];
 }
 
@@ -148,9 +150,9 @@ static const CGFloat kMonthLabelHeight = 17.f;
   CGRect fullWidthAutomaticLayoutFrame = CGRectMake(0.f, 0.f, self.width, 0.f);
 
   // The tile grid (the calendar body)
-  gridView = [[KalGridView alloc] initWithFrame:fullWidthAutomaticLayoutFrame logic:logic delegate:self.delegate];
-  [gridView addObserver:self forKeyPath:@"frame" options:NSKeyValueObservingOptionNew context:NULL];
-  [contentView addSubview:gridView];
+  self.gridView = [[KalGridView alloc] initWithFrame:fullWidthAutomaticLayoutFrame logic:logic delegate:self.delegate];
+  [self.gridView addObserver:self forKeyPath:@"frame" options:NSKeyValueObservingOptionNew context:NULL];
+  [contentView addSubview:self.gridView];
 
   // The list of events for the selected day
   self.tableView = [[UITableView alloc] initWithFrame:fullWidthAutomaticLayoutFrame style:UITableViewStylePlain];
@@ -164,12 +166,12 @@ static const CGFloat kMonthLabelHeight = 17.f;
   [contentView addSubview:shadowView];
   
   // Trigger the initial KVO update to finish the contentView layout
-  [gridView sizeToFit];
+  [self.gridView sizeToFit];
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
-  if (object == gridView && [keyPath isEqualToString:@"frame"]) {
+  if (object == self.gridView && [keyPath isEqualToString:@"frame"]) {
     
     /* Animate tableView filling the remaining space after the
      * gridView expanded or contracted to fit the # of weeks
@@ -181,7 +183,7 @@ static const CGFloat kMonthLabelHeight = 17.f;
      * tableView here, I do not need to wrap it in a
      * [UIView beginAnimations:context:].
      */
-    CGFloat gridBottom = gridView.top + gridView.height;
+    CGFloat gridBottom = self.gridView.top + self.gridView.height;
       CGRect frame = self.tableView.frame;
     frame.origin.y = gridBottom;
     frame.size.height = self.tableView.superview.height - gridBottom;
@@ -203,21 +205,21 @@ static const CGFloat kMonthLabelHeight = 17.f;
   headerTitleLabel.left = floorf(self.width/2.f - headerTitleLabel.width/2.f);
 }
 
-- (void)jumpToSelectedMonth { [gridView jumpToSelectedMonth]; }
+- (void)jumpToSelectedMonth { [self.gridView jumpToSelectedMonth]; }
 
-- (void)selectDate:(KalDate *)date { [gridView selectDate:date]; }
+- (void)selectDate:(KalDate *)date { [self.gridView selectDate:date]; }
 
-- (BOOL)isSliding { return gridView.transitioning; }
+- (BOOL)isSliding { return self.gridView.transitioning; }
 
-- (void)markTilesForDates:(NSArray *)dates { [gridView markTilesForDates:dates]; }
+- (void)markTilesForDates:(NSArray *)dates { [self.gridView markTilesForDates:dates]; }
 
-- (KalDate *)selectedDate { return gridView.selectedDate; }
+- (KalDate *)selectedDate { return self.gridView.selectedDate; }
 
 - (void)dealloc
 {
   [logic removeObserver:self forKeyPath:@"selectedMonthNameAndYear"];
   
-  [gridView removeObserver:self forKeyPath:@"frame"];
+  [self.gridView removeObserver:self forKeyPath:@"frame"];
 }
 
 @end

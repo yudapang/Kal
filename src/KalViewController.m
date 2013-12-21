@@ -40,6 +40,14 @@ NSString *const KalDataSourceChangedNotification = @"KalDataSourceChangedNotific
 
 @synthesize dataSource, delegate, initialDate, selectedDate;
 
+- (id)initWithSelectionMode:(KalSelectionMode)selectionMode;
+{
+    if ((self = [self initWithSelectedDate:[NSDate date]])) {
+        self.selectionMode = selectionMode;
+    }
+    return self;
+}
+
 - (id)initWithSelectedDate:(NSDate *)date
 {
   if ((self = [super init])) {
@@ -48,6 +56,7 @@ NSString *const KalDataSourceChangedNotification = @"KalDataSourceChangedNotific
     self.selectedDate = date;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(significantTimeChangeOccurred) name:UIApplicationSignificantTimeChangeNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadData) name:KalDataSourceChangedNotification object:nil];
+      self.selectionMode = KalSelectionModeSingle;
   }
   return self;
 }
@@ -181,15 +190,16 @@ NSString *const KalDataSourceChangedNotification = @"KalDataSourceChangedNotific
 
 - (void)loadView
 {
-  if (!self.title)
-    self.title = @"Calendar";
-  KalView *kalView = [[KalView alloc] initWithFrame:[[UIScreen mainScreen] applicationFrame] delegate:self logic:logic];
-  self.view = kalView;
-  tableView = kalView.tableView;
-  tableView.dataSource = dataSource;
-  tableView.delegate = delegate;
-  [kalView selectDate:[KalDate dateFromNSDate:self.initialDate]];
-  [self reloadData];
+    if (!self.title)
+        self.title = @"Calendar";
+    KalView *kalView = [[KalView alloc] initWithFrame:[[UIScreen mainScreen] applicationFrame] delegate:self logic:logic];
+    kalView.gridView.selectionMode = self.selectionMode;
+    self.view = kalView;
+    tableView = kalView.tableView;
+    tableView.dataSource = dataSource;
+    tableView.delegate = delegate;
+    [kalView selectDate:[KalDate dateFromNSDate:self.initialDate]];
+    [self reloadData];
 }
 
 - (void)viewDidUnload

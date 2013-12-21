@@ -23,7 +23,7 @@
    * If your application requires an arbitrary starting date, use -[KalViewController initWithSelectedDate:]
    * instead of -[KalViewController init].
    */
-  kal = [[KalViewController alloc] init];
+  kal = [[KalViewController alloc] initWithSelectionMode:KalSelectionModeRange];
   kal.title = @"NativeCal";
 
   /*
@@ -37,7 +37,7 @@
   
   // Setup the navigation stack and display it.
   navController = [[UINavigationController alloc] initWithRootViewController:kal];
-  [window addSubview:navController.view];
+    window.rootViewController = navController;
   [window makeKeyAndVisible];
 }
 
