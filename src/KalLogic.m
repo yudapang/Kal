@@ -70,7 +70,10 @@
 
 - (NSUInteger)numberOfDaysInPreviousPartialWeek
 {
-  return [self.baseDate cc_weekday] - 1;
+    int num = [self.baseDate cc_weekday] - 1;
+    if (num == 0)
+        num = 7;
+    return num;
 }
 
 - (NSUInteger)numberOfDaysInFollowingPartialWeek
@@ -78,7 +81,10 @@
   NSDateComponents *c = [self.baseDate cc_componentsForMonthDayAndYear];
   c.day = [self.baseDate cc_numberOfDaysInMonth];
   NSDate *lastDayOfTheMonth = [[NSCalendar currentCalendar] dateFromComponents:c];
-  return 7 - [lastDayOfTheMonth cc_weekday];
+    int num = 7 - [lastDayOfTheMonth cc_weekday];
+    if (num == 0)
+        num = 7;
+    return num;
 }
 
 - (NSArray *)calculateDaysInFinalWeekOfPreviousMonth

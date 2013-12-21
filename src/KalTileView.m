@@ -98,7 +98,7 @@ extern const CGSize kTileSize;
   self.frame = frame;
   
   date = nil;
-  flags.type = KalTileTypeRegular;
+  _type = KalTileTypeRegular;
   flags.highlighted = NO;
   flags.selected = NO;
   flags.marked = NO;
@@ -162,11 +162,9 @@ extern const CGSize kTileSize;
   [self setNeedsDisplay];
 }
 
-- (KalTileType)type { return flags.type; }
-
 - (void)setType:(KalTileType)tileType
 {
-  if (flags.type == tileType)
+  if (_type == tileType)
     return;
   
   // workaround since I cannot draw outside of the frame in drawRect:
@@ -175,20 +173,23 @@ extern const CGSize kTileSize;
     rect.origin.x--;
     rect.size.width++;
     rect.size.height++;
-  } else if (flags.type == KalTileTypeToday) {
+  } else if (_type == KalTileTypeToday) {
     rect.origin.x++;
     rect.size.width--;
     rect.size.height--;
   }
   self.frame = rect;
   
-  flags.type = tileType;
+  _type = tileType;
   [self setNeedsDisplay];
 }
 
-- (BOOL)isToday { return flags.type == KalTileTypeToday; }
+- (BOOL)isToday { return self.type & KalTileTypeToday; }
 
-- (BOOL)belongsToAdjacentMonth { return flags.type == KalTileTypeAdjacent; }
+- (BOOL)isFirst { return self.type & KalTileTypeFirst; }
 
+- (BOOL)isLast { return self.type & KalTileTypeLast; }
+
+- (BOOL)belongsToAdjacentMonth { return self.type & KalTileTypeAdjacent; }
 
 @end
