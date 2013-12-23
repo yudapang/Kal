@@ -16,7 +16,7 @@
 #define SLIDE_UP 1
 #define SLIDE_DOWN 2
 
-const CGSize kTileSize = { 46.f, 44.f };
+const CGSize kTileSize = { 46.f, 48.f };
 
 static NSString *kSlideAnimationId = @"KalSwitchMonths";
 
@@ -101,6 +101,7 @@ static NSString *kSlideAnimationId = @"KalSwitchMonths";
     
     if (self = [super initWithFrame:frame]) {
         self.clipsToBounds = YES;
+        self.backgroundColor = [UIColor whiteColor];
         logic = theLogic;
         delegate = theDelegate;
         
@@ -121,8 +122,8 @@ static NSString *kSlideAnimationId = @"KalSwitchMonths";
 
 - (void)drawRect:(CGRect)rect
 {
-    [[UIImage imageNamed:@"Kal.bundle/kal_grid_background.png"] drawInRect:rect];
-    [[UIColor colorWithRed:0.63f green:0.65f blue:0.68f alpha:1.f] setFill];
+//    [[UIImage imageNamed:@"Kal.bundle/kal_grid_background.png"] drawInRect:rect];
+    [kLightGrayColor setFill];
     CGRect line;
     line.origin = CGPointMake(0.f, self.height - 1.f);
     line.size = CGSizeMake(self.width, 1.f);

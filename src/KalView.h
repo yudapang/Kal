@@ -41,7 +41,6 @@
 @interface KalView : UIView
 {
   UILabel *headerTitleLabel;
-  UIImageView *shadowView;
   KalLogic *logic;
 }
 
