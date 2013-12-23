@@ -71,6 +71,6 @@
 - (void)showPreviousMonth;
 - (void)showFollowingMonth;
 - (void)didSelectDate:(NSDate *)date;
-- (void)didSelectFirstDate:(NSDate *)date lastDate:(NSDate *)date;
+- (void)didSelectBeginDate:(NSDate *)beginDate endDate:(NSDate *)endDate;
 
 @end

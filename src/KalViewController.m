@@ -30,14 +30,35 @@ void mach_absolute_difference(uint64_t end, uint64_t start, struct timespec *tp)
 NSString *const KalDataSourceChangedNotification = @"KalDataSourceChangedNotification";
 
 @interface KalViewController ()
-@property (nonatomic, strong, readwrite) NSDate *initialDate;
-@property (nonatomic, strong, readwrite) NSDate *selectedDate;
+
 - (KalView*)calendarView;
+
 @end
 
 @implementation KalViewController
 
-@synthesize dataSource, delegate, initialDate, selectedDate;
+@synthesize dataSource, delegate;
+
+- (void)setSelectedDate:(NSDate *)selectedDate
+{
+    _selectedDate = selectedDate;
+    self.calendarView.gridView.beginDate = _selectedDate;
+    [self showAndSelectDate:_selectedDate];
+}
+
+- (void)setBeginDate:(NSDate *)beginDate
+{
+    _beginDate = beginDate;
+    self.calendarView.gridView.beginDate = _beginDate;
+    [self showAndSelectDate:_beginDate];
+}
+
+- (void)setEndDate:(NSDate *)endDate
+{
+    _endDate = endDate;
+    self.calendarView.gridView.endDate = _endDate;
+    [(KalView *)self.view redrawEntireMonth];
+}
 
 - (void)setMinAvailableDate:(NSDate *)minAvailableDate
 {
@@ -55,30 +76,21 @@ NSString *const KalDataSourceChangedNotification = @"KalDataSourceChangedNotific
 
 - (id)initWithSelectionMode:(KalSelectionMode)selectionMode;
 {
-    if ((self = [self initWithSelectedDate:[NSDate date]])) {
-        self.selectionMode = selectionMode;
-    }
-    return self;
-}
-
-- (id)initWithSelectedDate:(NSDate *)date
-{
     if ((self = [super init])) {
-        logic = [[KalLogic alloc] initForDate:date];
-        self.initialDate = date;
-        self.selectedDate = date;
+        logic = [[KalLogic alloc] initForDate:[NSDate date]];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(significantTimeChangeOccurred) name:UIApplicationSignificantTimeChangeNotification object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadData) name:KalDataSourceChangedNotification object:nil];
-        self.selectionMode = KalSelectionModeSingle;
-        if ([self respondsToSelector:@selector(setEdgesForExtendedLayout:)])
+        self.selectionMode = selectionMode;
+        if ([self respondsToSelector:@selector(setEdgesForExtendedLayout:)]) {
             self.edgesForExtendedLayout = UIRectEdgeNone;
+        }
     }
     return self;
 }
 
 - (id)init
 {
-    return [self initWithSelectedDate:[NSDate date]];
+    return [self initWithSelectionMode:KalSelectionModeSingle];
 }
 
 - (KalView*)calendarView { return (KalView*)self.view; }
@@ -121,11 +133,21 @@ NSString *const KalDataSourceChangedNotification = @"KalDataSourceChangedNotific
 
 - (void)didSelectDate:(NSDate *)date
 {
-    self.selectedDate = date;
+    _selectedDate = date;
     NSDate *from = [date cc_dateByMovingToBeginningOfDay];
     NSDate *to = [date cc_dateByMovingToEndOfDay];
     [self clearTable];
     [dataSource loadItemsFromDate:from toDate:to];
+    [tableView reloadData];
+    [tableView flashScrollIndicators];
+}
+
+- (void)didSelectBeginDate:(NSDate *)beginDate endDate:(NSDate *)endDate
+{
+    _beginDate = beginDate;
+    _endDate = endDate;
+    [self clearTable];
+    [dataSource loadItemsFromDate:beginDate toDate:endDate];
     [tableView reloadData];
     [tableView flashScrollIndicators];
 }
@@ -188,12 +210,6 @@ NSString *const KalDataSourceChangedNotification = @"KalDataSourceChangedNotific
 
 // -----------------------------------------------------------------------------------
 #pragma mark UIViewController
-
-- (void)didReceiveMemoryWarning
-{
-    self.initialDate = self.selectedDate; // must be done before calling super
-    [super didReceiveMemoryWarning];
-}
 
 - (void)loadView
 {

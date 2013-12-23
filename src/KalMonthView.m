@@ -86,7 +86,7 @@ extern const CGSize kTileSize;
 {
     KalTileView *tile = nil;
     for (KalTileView *t in self.subviews) {
-        if ([t.date isEqual:date]) {
+        if ([t.date isEqualToDate:date]) {
             tile = t;
             break;
         }

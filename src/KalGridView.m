@@ -23,8 +23,6 @@ static NSString *kSlideAnimationId = @"KalSwitchMonths";
 @interface KalGridView ()
 
 @property (nonatomic, strong) NSMutableArray *highligthedTiles;
-@property (nonatomic, strong) NSDate *beginDate;
-@property (nonatomic, strong) NSDate *endDate;
 
 - (void)swapMonthViews;
 
@@ -139,26 +137,6 @@ static NSString *kSlideAnimationId = @"KalSwitchMonths";
 #pragma mark -
 #pragma mark Touches
 
-//- (void)setHighlightedTiles:(NSArray *)tiles
-//{
-//  if (highlightedTile != tile) {
-//    highlightedTile.highlighted = NO;
-//    highlightedTile = [tile retain];
-//    tile.highlighted = YES;
-//    [tile setNeedsDisplay];
-//  }
-//    for (KalTileView *tile in tiles) {
-//        tile.highlighted = YES;
-//        [tile setNeedsDisplay];
-//    }
-//}
-
-- (void)setSelectedTiles:(KalTileView *)tile
-{
-    tile.selected = YES;
-    [delegate didSelectDate:tile.date];
-}
-
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
     UITouch *touch = [touches anyObject];
@@ -246,6 +224,20 @@ static NSString *kSlideAnimationId = @"KalSwitchMonths";
                 }
             }
             self.endDate = endDate;
+            
+            NSDate *realBeginDate = self.beginDate;
+            NSDate *realEndDate = self.endDate;
+            if ([self.beginDate compare:self.endDate] == NSOrderedDescending) {
+                realBeginDate = self.endDate;
+                realEndDate = self.beginDate;
+            }
+            if ([(id)delegate respondsToSelector:@selector(didSelectBeginDate:endDate:)]) {
+                [delegate didSelectBeginDate:self.endDate endDate:self.beginDate];
+            }
+        } else {
+            if ([(id)delegate respondsToSelector:@selector(didSelectDate:)]) {
+                [delegate didSelectDate:self.beginDate];
+            }
         }
     }
 }
