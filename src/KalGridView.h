@@ -34,6 +34,8 @@ typedef enum {
 @property (nonatomic, assign) BOOL transitioning;
 @property (unsafe_unretained, nonatomic, readonly) KalDate *selectedDate;
 @property (nonatomic, assign) KalSelectionMode selectionMode;
+@property (nonatomic, strong) NSDate *minAvailableDate;
+@property (nonatomic, strong) NSDate *maxAVailableDate;
 
 - (id)initWithFrame:(CGRect)frame logic:(KalLogic *)logic delegate:(id<KalViewDelegate>)delegate;
 - (void)selectDate:(KalDate *)date;

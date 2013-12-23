@@ -34,6 +34,8 @@
 @property (nonatomic, unsafe_unretained) id<KalDataSource> dataSource;
 @property (nonatomic, strong, readonly) NSDate *selectedDate;
 @property (nonatomic, assign) KalSelectionMode *selectionMode;
+@property (nonatomic, strong) NSDate *minAvailableDate;
+@property (nonatomic, strong) NSDate *maxAVailableDate;
 
 - (id)initWithSelectionMode:(KalSelectionMode)selectionMode;
 - (id)initWithSelectedDate:(NSDate *)selectedDate;  // designated initializer. When the calendar is first displayed to the user, the month that contains 'selectedDate' will be shown and the corresponding tile for 'selectedDate' will be automatically selected.

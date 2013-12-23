@@ -6,7 +6,7 @@
 #import "NativeCalAppDelegate.h"
 #import "EventKitDataSource.h"
 #import "Kal.h"
-
+#import "NSDate+Convenience.h"
 #import <EventKit/EventKit.h>
 #import <EventKitUI/EventKitUI.h>
 
@@ -34,6 +34,8 @@
   kal.delegate = self;
   dataSource = [[EventKitDataSource alloc] init];
   kal.dataSource = dataSource;
+    kal.minAvailableDate = [NSDate dateStartOfDay:[NSDate date]];
+    kal.maxAVailableDate = [kal.minAvailableDate offsetDay:30];
   
   // Setup the navigation stack and display it.
   navController = [[UINavigationController alloc] initWithRootViewController:kal];

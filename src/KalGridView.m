@@ -172,6 +172,9 @@ static NSString *kSlideAnimationId = @"KalSwitchMonths";
     
     if ([hitView isKindOfClass:[KalTileView class]]) {
         KalTileView *tile = (KalTileView*)hitView;
+        if (tile.type & KalTileTypeDisable)
+            return;
+        
         KalDate *date = tile.date;
         if ([date compare:self.beginDate] == NSOrderedSame) {
             date = self.beginDate;
@@ -199,6 +202,9 @@ static NSString *kSlideAnimationId = @"KalSwitchMonths";
     
     if ([hitView isKindOfClass:[KalTileView class]]) {
         KalTileView *tile = (KalTileView*)hitView;
+        if (tile.type & KalTileTypeDisable)
+            return;
+        
         KalDate *endDate = tile.date;
         if ([endDate compare:self.beginDate] == NSOrderedSame || [endDate compare:self.endDate] == NSOrderedSame)
             return;
@@ -221,6 +227,9 @@ static NSString *kSlideAnimationId = @"KalSwitchMonths";
     
     if ([hitView isKindOfClass:[KalTileView class]]) {
         KalTileView *tile = (KalTileView*)hitView;
+        if (tile.type & KalTileTypeDisable)
+            return;
+        
         if ((self.selectionMode == KalSelectionModeSingle && tile.belongsToAdjacentMonth) ||
             (self.selectionMode == KalSelectionModeRange && (tile.isFirst || tile.isLast))) {
             if ([tile.date compare:[KalDate dateFromNSDate:logic.baseDate]] == NSOrderedDescending) {
@@ -232,7 +241,12 @@ static NSString *kSlideAnimationId = @"KalSwitchMonths";
         if (self.selectionMode == KalSelectionModeRange) {
             KalDate *endDate = tile.date;
             if ([tile.date compare:self.beginDate] == NSOrderedSame) {
-                endDate = [KalDate dateFromNSDate:[[endDate NSDate] offsetDay:1]];
+                NSDate *endNSDate = [endDate NSDate];
+                if ([[endNSDate offsetDay:1] compare:self.maxAVailableDate] == NSOrderedDescending) {
+                    endDate = [KalDate dateFromNSDate:[endNSDate offsetDay:-1]];
+                } else {
+                    endDate = [KalDate dateFromNSDate:[endNSDate offsetDay:1]];
+                }
             }
             self.endDate = endDate;
         }
@@ -285,7 +299,9 @@ static NSString *kSlideAnimationId = @"KalSwitchMonths";
     
     [backMonthView showDates:logic.daysInSelectedMonth
         leadingAdjacentDates:logic.daysInFinalWeekOfPreviousMonth
-       trailingAdjacentDates:logic.daysInFirstWeekOfFollowingMonth];
+       trailingAdjacentDates:logic.daysInFirstWeekOfFollowingMonth
+            minAvailableDate:self.minAvailableDate
+            maxAvailableDate:self.maxAVailableDate];
     
     // At this point, the calendar logic has already been advanced or retreated to the
     // following/previous month, so in order to determine whether there are

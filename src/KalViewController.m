@@ -40,6 +40,20 @@ NSString *const KalDataSourceChangedNotification = @"KalDataSourceChangedNotific
 
 @synthesize dataSource, delegate, initialDate, selectedDate;
 
+- (void)setMinAvailableDate:(NSDate *)minAvailableDate
+{
+    _minAvailableDate = minAvailableDate;
+    ((KalView *)self.view).gridView.minAvailableDate = minAvailableDate;
+    [(KalView *)self.view redrawEntireMonth];
+}
+
+- (void)setMaxAVailableDate:(NSDate *)maxAVailableDate
+{
+    _maxAVailableDate = maxAVailableDate;
+    ((KalView *)self.view).gridView.maxAVailableDate = maxAVailableDate;
+    [(KalView *)self.view redrawEntireMonth];
+}
+
 - (id)initWithSelectionMode:(KalSelectionMode)selectionMode;
 {
     if ((self = [self initWithSelectedDate:[NSDate date]])) {

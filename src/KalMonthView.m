@@ -33,7 +33,7 @@ extern const CGSize kTileSize;
     return self;
 }
 
-- (void)showDates:(NSArray *)mainDates leadingAdjacentDates:(NSArray *)leadingAdjacentDates trailingAdjacentDates:(NSArray *)trailingAdjacentDates
+- (void)showDates:(NSArray *)mainDates leadingAdjacentDates:(NSArray *)leadingAdjacentDates trailingAdjacentDates:(NSArray *) trailingAdjacentDates minAvailableDate:(NSDate *)minAvailableDate maxAvailableDate:(NSDate *)maxAvailableDate
 {
     int tileNum = 0;
     NSArray *dates[] = { leadingAdjacentDates, mainDates, trailingAdjacentDates };
@@ -44,7 +44,9 @@ extern const CGSize kTileSize;
             KalTileView *tile = [self.subviews objectAtIndex:tileNum];
             [tile resetState];
             tile.date = d;
-            if (i == 0 && j == 0) {
+            if ((minAvailableDate && [[d NSDate] compare:minAvailableDate] == NSOrderedAscending) || (maxAvailableDate && [[d NSDate] compare:maxAvailableDate] == NSOrderedDescending)) {
+                tile.type = KalTileTypeDisable;
+            } else if (i == 0 && j == 0) {
                 tile.type = KalTileTypeAdjacent | KalTileTypeFirst;
             } else if (i == 2 && j == dates[i].count-1) {
                 tile.type = KalTileTypeAdjacent | KalTileTypeLast;
