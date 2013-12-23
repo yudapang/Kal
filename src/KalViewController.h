@@ -7,7 +7,7 @@
 #import "KalView.h"       // for the KalViewDelegate protocol
 #import "KalDataSource.h" // for the KalDataSourceCallbacks protocol
 
-@class KalLogic, KalDate;
+@class KalLogic;
 
 /*
  *    KalViewController

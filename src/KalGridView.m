@@ -10,9 +10,7 @@
 #import "KalMonthView.h"
 #import "KalTileView.h"
 #import "KalLogic.h"
-#import "KalDate.h"
 #import "KalPrivate.h"
-#import "NSDate+Convenience.h"
 
 #define SLIDE_NONE 0
 #define SLIDE_UP 1
@@ -25,8 +23,8 @@ static NSString *kSlideAnimationId = @"KalSwitchMonths";
 @interface KalGridView ()
 
 @property (nonatomic, strong) NSMutableArray *highligthedTiles;
-@property (nonatomic, strong) KalDate *beginDate;
-@property (nonatomic, strong) KalDate *endDate;
+@property (nonatomic, strong) NSDate *beginDate;
+@property (nonatomic, strong) NSDate *endDate;
 
 - (void)swapMonthViews;
 
@@ -34,7 +32,7 @@ static NSString *kSlideAnimationId = @"KalSwitchMonths";
 
 @implementation KalGridView
 
-- (void)setBeginDate:(KalDate *)beginDate
+- (void)setBeginDate:(NSDate *)beginDate
 {
     KalTileView *preTile = [frontMonthView tileForDate:_beginDate];
     preTile.selected = NO;
@@ -45,7 +43,7 @@ static NSString *kSlideAnimationId = @"KalSwitchMonths";
     self.endDate = nil;
 }
 
-- (void)setEndDate:(KalDate *)endDate
+- (void)setEndDate:(NSDate *)endDate
 {
     KalTileView *beginTile = [frontMonthView tileForDate:self.beginDate];
     beginTile.selected = YES;
@@ -56,12 +54,12 @@ static NSString *kSlideAnimationId = @"KalSwitchMonths";
     KalTileView *currentTile = [frontMonthView tileForDate:_endDate];
     currentTile.selected = YES;
     
-    KalDate *realBeginDate;
-    KalDate *realEndDate;
+    NSDate *realBeginDate;
+    NSDate *realEndDate;
     
     [self removeHighlights];
     
-    if ([self.endDate compare:self.beginDate] == NSOrderedSame) {
+    if (!_endDate || [_endDate isEqualToDate:self.beginDate]) {
         return;
     } else if ([self.beginDate compare:self.endDate] == NSOrderedAscending) {
         realBeginDate = self.beginDate;
@@ -71,10 +69,10 @@ static NSString *kSlideAnimationId = @"KalSwitchMonths";
         realEndDate = self.beginDate;
     }
     
-    int dayCount = [NSDate dayBetweenStartDate:[realBeginDate NSDate] endDate:[realEndDate NSDate]];
+    int dayCount = [NSDate dayBetweenStartDate:realBeginDate endDate:realEndDate];
     for (int i=1; i<dayCount; i++) {
-        NSDate *nextDay = [[realBeginDate NSDate] offsetDay:i];
-        KalTileView *nextTile = [frontMonthView tileForDate:[KalDate dateFromNSDate:nextDay]];
+        NSDate *nextDay = [realBeginDate offsetDay:i];
+        KalTileView *nextTile = [frontMonthView tileForDate:nextDay];
         if (nextTile) {
             nextTile.highlighted = YES;
             [nextTile setNeedsDisplay];
@@ -175,12 +173,12 @@ static NSString *kSlideAnimationId = @"KalSwitchMonths";
         if (tile.type & KalTileTypeDisable)
             return;
         
-        KalDate *date = tile.date;
-        if ([date compare:self.beginDate] == NSOrderedSame) {
+        NSDate *date = tile.date;
+        if ([date isEqualToDate:self.beginDate]) {
             date = self.beginDate;
             _beginDate = _endDate;
             _endDate = date;
-        } else if ([date compare:self.endDate] == NSOrderedSame) {
+        } else if ([date isEqualToDate:self.endDate]) {
             
         } else {
             self.beginDate = date;
@@ -205,11 +203,11 @@ static NSString *kSlideAnimationId = @"KalSwitchMonths";
         if (tile.type & KalTileTypeDisable)
             return;
         
-        KalDate *endDate = tile.date;
-        if ([endDate compare:self.beginDate] == NSOrderedSame || [endDate compare:self.endDate] == NSOrderedSame)
+        NSDate *endDate = tile.date;
+        if ([endDate isEqualToDate:self.beginDate] || [endDate isEqualToDate:self.endDate])
             return;
         if (tile.isFirst || tile.isLast) {
-            if ([tile.date compare:[KalDate dateFromNSDate:logic.baseDate]] == NSOrderedDescending) {
+            if ([tile.date compare:logic.baseDate] == NSOrderedDescending) {
                 [delegate showFollowingMonth];
             } else {
                 [delegate showPreviousMonth];
@@ -232,20 +230,19 @@ static NSString *kSlideAnimationId = @"KalSwitchMonths";
         
         if ((self.selectionMode == KalSelectionModeSingle && tile.belongsToAdjacentMonth) ||
             (self.selectionMode == KalSelectionModeRange && (tile.isFirst || tile.isLast))) {
-            if ([tile.date compare:[KalDate dateFromNSDate:logic.baseDate]] == NSOrderedDescending) {
+            if ([tile.date compare:logic.baseDate] == NSOrderedDescending) {
                 [delegate showFollowingMonth];
             } else {
                 [delegate showPreviousMonth];
             }
         }
         if (self.selectionMode == KalSelectionModeRange) {
-            KalDate *endDate = tile.date;
-            if ([tile.date compare:self.beginDate] == NSOrderedSame) {
-                NSDate *endNSDate = [endDate NSDate];
-                if ([[endNSDate offsetDay:1] compare:self.maxAVailableDate] == NSOrderedDescending) {
-                    endDate = [KalDate dateFromNSDate:[endNSDate offsetDay:-1]];
+            NSDate *endDate = tile.date;
+            if ([tile.date isEqualToDate:self.beginDate]) {
+                if ([[endDate offsetDay:1] compare:self.maxAVailableDate] == NSOrderedDescending) {
+                    endDate = [endDate offsetDay:-1];
                 } else {
-                    endDate = [KalDate dateFromNSDate:[endNSDate offsetDay:1]];
+                    endDate = [endDate offsetDay:1];
                 }
             }
             self.endDate = endDate;
@@ -327,11 +324,6 @@ static NSString *kSlideAnimationId = @"KalSwitchMonths";
 
 #pragma mark -
 
-- (void)selectDate:(KalDate *)date
-{
-    //  self.selectedTile = [frontMonthView tileForDate:date];
-}
-
 - (void)swapMonthViews
 {
     KalMonthView *tmp = backMonthView;
@@ -346,8 +338,6 @@ static NSString *kSlideAnimationId = @"KalSwitchMonths";
 }
 
 - (void)markTilesForDates:(NSArray *)dates { [frontMonthView markTilesForDates:dates]; }
-
-//- (KalDate *)selectedDate { return self.endTile.date; }
 
 #pragma mark -
 

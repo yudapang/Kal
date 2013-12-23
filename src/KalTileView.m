@@ -4,14 +4,11 @@
  */
 
 #import "KalTileView.h"
-#import "KalDate.h"
 #import "KalPrivate.h"
 
 extern const CGSize kTileSize;
 
 @implementation KalTileView
-
-@synthesize date;
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -101,19 +98,19 @@ extern const CGSize kTileSize;
   frame.size = kTileSize;
   self.frame = frame;
   
-  date = nil;
+  self.date = nil;
   _type = KalTileTypeRegular;
   flags.highlighted = NO;
   flags.selected = NO;
   flags.marked = NO;
 }
 
-- (void)setDate:(KalDate *)aDate
+- (void)setDate:(NSDate *)aDate
 {
-  if (date == aDate)
+  if (_date == aDate)
     return;
 
-  date = aDate;
+  _date = aDate;
 
   [self setNeedsDisplay];
 }

@@ -12,8 +12,6 @@
 		533B287611E2D46E00B3CC07 /* Kal.h in Headers */ = {isa = PBXBuildFile; fileRef = 533B286011E2D46E00B3CC07 /* Kal.h */; };
 		533B287711E2D46E00B3CC07 /* KalDataSource.h in Headers */ = {isa = PBXBuildFile; fileRef = 533B286111E2D46E00B3CC07 /* KalDataSource.h */; };
 		533B287811E2D46E00B3CC07 /* KalDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 533B286211E2D46E00B3CC07 /* KalDataSource.m */; };
-		533B287911E2D46E00B3CC07 /* KalDate.h in Headers */ = {isa = PBXBuildFile; fileRef = 533B286311E2D46E00B3CC07 /* KalDate.h */; };
-		533B287A11E2D46E00B3CC07 /* KalDate.m in Sources */ = {isa = PBXBuildFile; fileRef = 533B286411E2D46E00B3CC07 /* KalDate.m */; };
 		533B287B11E2D46E00B3CC07 /* KalGridView.h in Headers */ = {isa = PBXBuildFile; fileRef = 533B286511E2D46E00B3CC07 /* KalGridView.h */; };
 		533B287C11E2D46E00B3CC07 /* KalGridView.m in Sources */ = {isa = PBXBuildFile; fileRef = 533B286611E2D46E00B3CC07 /* KalGridView.m */; };
 		533B287D11E2D46E00B3CC07 /* KalLogic.h in Headers */ = {isa = PBXBuildFile; fileRef = 533B286711E2D46E00B3CC07 /* KalLogic.h */; };
@@ -42,8 +40,6 @@
 		533B286011E2D46E00B3CC07 /* Kal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Kal.h; sourceTree = SOURCE_ROOT; };
 		533B286111E2D46E00B3CC07 /* KalDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KalDataSource.h; sourceTree = SOURCE_ROOT; };
 		533B286211E2D46E00B3CC07 /* KalDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KalDataSource.m; sourceTree = SOURCE_ROOT; };
-		533B286311E2D46E00B3CC07 /* KalDate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KalDate.h; sourceTree = SOURCE_ROOT; };
-		533B286411E2D46E00B3CC07 /* KalDate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KalDate.m; sourceTree = SOURCE_ROOT; };
 		533B286511E2D46E00B3CC07 /* KalGridView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KalGridView.h; sourceTree = SOURCE_ROOT; };
 		533B286611E2D46E00B3CC07 /* KalGridView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KalGridView.m; sourceTree = SOURCE_ROOT; };
 		533B286711E2D46E00B3CC07 /* KalLogic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KalLogic.h; sourceTree = SOURCE_ROOT; };
@@ -113,8 +109,6 @@
 				533B286011E2D46E00B3CC07 /* Kal.h */,
 				533B286111E2D46E00B3CC07 /* KalDataSource.h */,
 				533B286211E2D46E00B3CC07 /* KalDataSource.m */,
-				533B286311E2D46E00B3CC07 /* KalDate.h */,
-				533B286411E2D46E00B3CC07 /* KalDate.m */,
 				533B286511E2D46E00B3CC07 /* KalGridView.h */,
 				533B286611E2D46E00B3CC07 /* KalGridView.m */,
 				533B286711E2D46E00B3CC07 /* KalLogic.h */,
@@ -163,7 +157,6 @@
 				AA747D9F0F9514B9006C5449 /* Kal_Prefix.pch in Headers */,
 				533B287611E2D46E00B3CC07 /* Kal.h in Headers */,
 				533B287711E2D46E00B3CC07 /* KalDataSource.h in Headers */,
-				533B287911E2D46E00B3CC07 /* KalDate.h in Headers */,
 				533B287B11E2D46E00B3CC07 /* KalGridView.h in Headers */,
 				533B287D11E2D46E00B3CC07 /* KalLogic.h in Headers */,
 				533B287F11E2D46E00B3CC07 /* KalMonthView.h in Headers */,
@@ -231,7 +224,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				533B287811E2D46E00B3CC07 /* KalDataSource.m in Sources */,
-				533B287A11E2D46E00B3CC07 /* KalDate.m in Sources */,
 				533B287C11E2D46E00B3CC07 /* KalGridView.m in Sources */,
 				533B287E11E2D46E00B3CC07 /* KalLogic.m in Sources */,
 				533B288011E2D46E00B3CC07 /* KalMonthView.m in Sources */,

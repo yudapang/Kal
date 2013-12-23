@@ -5,7 +5,7 @@
 
 #import <UIKit/UIKit.h>
 
-@class KalTileView, KalDate;
+@class KalTileView;
 
 @interface KalMonthView : UIView
 {
@@ -18,7 +18,7 @@
 - (id)initWithFrame:(CGRect)rect; // designated initializer
 - (void)showDates:(NSArray *)mainDates leadingAdjacentDates:(NSArray *)leadingAdjacentDates trailingAdjacentDates:(NSArray *) trailingAdjacentDates minAvailableDate:(NSDate *)minAvailableDate maxAvailableDate:(NSDate *)maxAvailableDate;
 - (KalTileView *)firstTileOfMonth;
-- (KalTileView *)tileForDate:(KalDate *)date;
+- (KalTileView *)tileForDate:(NSDate *)date;
 - (void)markTilesForDates:(NSArray *)dates;
 
 @end

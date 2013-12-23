@@ -6,7 +6,7 @@
 #import <UIKit/UIKit.h>
 #import "KalGridView.h"
 
-@class KalLogic, KalDate;
+@class KalLogic;
 @protocol KalViewDelegate, KalDataSourceCallbacks;
 
 /*
@@ -47,12 +47,10 @@
 
 @property (nonatomic, weak) id<KalViewDelegate> delegate;
 @property (nonatomic, strong) UITableView *tableView;
-@property (nonatomic, strong) KalDate *selectedDate;
 @property (nonatomic, strong) KalGridView *gridView;
 
 - (id)initWithFrame:(CGRect)frame delegate:(id<KalViewDelegate>)delegate logic:(KalLogic *)logic;
 - (BOOL)isSliding;
-- (void)selectDate:(KalDate *)date;
 - (void)markTilesForDates:(NSArray *)dates;
 - (void)redrawEntireMonth;
 
@@ -66,15 +64,13 @@
 
 #pragma mark -
 
-@class KalDate;
-
 @protocol KalViewDelegate
 
 @optional
 
 - (void)showPreviousMonth;
 - (void)showFollowingMonth;
-- (void)didSelectDate:(KalDate *)date;
-- (void)didSelectFirstDate:(KalDate *)date lastDate:(KalDate *)date;
+- (void)didSelectDate:(NSDate *)date;
+- (void)didSelectFirstDate:(NSDate *)date lastDate:(NSDate *)date;
 
 @end

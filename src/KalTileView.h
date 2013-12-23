@@ -14,11 +14,8 @@ typedef enum {
     KalTileTypeDisable   = 1 << 4,
 } KalTileType;
 
-@class KalDate;
-
 @interface KalTileView : UIView
 {
-    KalDate *date;
     CGPoint origin;
     struct {
         unsigned int selected : 1;
@@ -27,7 +24,7 @@ typedef enum {
     } flags;
 }
 
-@property (nonatomic, strong) KalDate *date;
+@property (nonatomic, strong) NSDate *date;
 @property (nonatomic, getter=isHighlighted) BOOL highlighted;
 @property (nonatomic, getter=isSelected) BOOL selected;
 @property (nonatomic, getter=isMarked) BOOL marked;

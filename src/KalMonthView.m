@@ -7,7 +7,6 @@
 #import "KalMonthView.h"
 #import "KalTileView.h"
 #import "KalView.h"
-#import "KalDate.h"
 #import "KalPrivate.h"
 
 extern const CGSize kTileSize;
@@ -40,11 +39,11 @@ extern const CGSize kTileSize;
     
     for (int i=0; i<3; i++) {
         for (int j=0; j<dates[i].count; j++) {
-            KalDate *d = dates[i][j];
+            NSDate *d = dates[i][j];
             KalTileView *tile = [self.subviews objectAtIndex:tileNum];
             [tile resetState];
             tile.date = d;
-            if ((minAvailableDate && [[d NSDate] compare:minAvailableDate] == NSOrderedAscending) || (maxAvailableDate && [[d NSDate] compare:maxAvailableDate] == NSOrderedDescending)) {
+            if ((minAvailableDate && [d compare:minAvailableDate] == NSOrderedAscending) || (maxAvailableDate && [d compare:maxAvailableDate] == NSOrderedDescending)) {
                 tile.type = KalTileTypeDisable;
             } else if (i == 0 && j == 0) {
                 tile.type = KalTileTypeAdjacent | KalTileTypeFirst;
@@ -83,7 +82,7 @@ extern const CGSize kTileSize;
     return tile;
 }
 
-- (KalTileView *)tileForDate:(KalDate *)date
+- (KalTileView *)tileForDate:(NSDate *)date
 {
     KalTileView *tile = nil;
     for (KalTileView *t in self.subviews) {
@@ -105,7 +104,7 @@ extern const CGSize kTileSize;
     for (KalTileView *tile in self.subviews)
     {
         tile.marked = [dates containsObject:tile.date];
-        NSString *dayString = [tileAccessibilityFormatter stringFromDate:[tile.date NSDate]];
+        NSString *dayString = [tileAccessibilityFormatter stringFromDate:tile.date];
         if (dayString) {
             NSMutableString *helperText = [[NSMutableString alloc] initWithCapacity:128];
             if ([tile.date isToday])

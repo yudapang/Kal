@@ -10,7 +10,7 @@ typedef enum {
     KalSelectionModeRange,
 } KalSelectionMode;
 
-@class KalTileView, KalMonthView, KalLogic, KalDate;
+@class KalTileView, KalMonthView, KalLogic;
 @protocol KalViewDelegate;
 
 /*
@@ -32,13 +32,12 @@ typedef enum {
 }
 
 @property (nonatomic, assign) BOOL transitioning;
-@property (unsafe_unretained, nonatomic, readonly) KalDate *selectedDate;
+@property (nonatomic, readonly, strong) NSDate *selectedDate;
 @property (nonatomic, assign) KalSelectionMode selectionMode;
 @property (nonatomic, strong) NSDate *minAvailableDate;
 @property (nonatomic, strong) NSDate *maxAVailableDate;
 
 - (id)initWithFrame:(CGRect)frame logic:(KalLogic *)logic delegate:(id<KalViewDelegate>)delegate;
-- (void)selectDate:(KalDate *)date;
 - (void)markTilesForDates:(NSArray *)dates;
 
 // These 3 methods should be called *after* the KalLogic
