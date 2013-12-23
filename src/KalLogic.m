@@ -33,7 +33,7 @@
 {
   if ((self = [super init])) {
     monthAndYearFormatter = [[NSDateFormatter alloc] init];
-    [monthAndYearFormatter setDateFormat:@"LLLL yyyy"];
+    [monthAndYearFormatter setDateFormat:NSLocalizedString(@"CalendarTitle", @"")];
     [self moveToMonthForDate:date];
   }
   return self;
