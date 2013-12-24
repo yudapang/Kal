@@ -13,6 +13,7 @@
 		288765FD0DF74451002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765FC0DF74451002DB57D /* CoreGraphics.framework */; };
 		28AD733F0D9D9553002E5188 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28AD733E0D9D9553002E5188 /* MainWindow.xib */; };
 		3507B67518659367007CDEF2 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3507B67418659366007CDEF2 /* Default-568h@2x.png */; };
+		35C038031869322B00C90C4F /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35C038021869322B00C90C4F /* CoreText.framework */; };
 		35C6E5C218680DA30094FB76 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 35C6E5C418680DA30094FB76 /* Localizable.strings */; };
 		533B295F11E4A8E100B3CC07 /* libKal.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 533B295B11E4A89500B3CC07 /* libKal.a */; };
 		533B296811E4A90D00B3CC07 /* Kal.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 533B296711E4A90D00B3CC07 /* Kal.bundle */; };
@@ -48,9 +49,10 @@
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		32CA4F630368D1EE00C91783 /* NativeCal_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NativeCal_Prefix.pch; sourceTree = "<group>"; };
 		3507B67418659366007CDEF2 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
-		35C6E5C318680DA30094FB76 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
-		35C6E5C518680DC00094FB76 /* en */ = {isa = PBXFileReference; lastKnownFileType = file; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
-		35C6E5C618680DD20094FB76 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = file; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		35C038021869322B00C90C4F /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
+		35C6E5C318680DA30094FB76 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
+		35C6E5C518680DC00094FB76 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		35C6E5C618680DD20094FB76 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		533B295311E4A89500B3CC07 /* Kal.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Kal.xcodeproj; path = ../../src/Kal.xcodeproj; sourceTree = SOURCE_ROOT; };
 		533B296711E4A90D00B3CC07 /* Kal.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = Kal.bundle; path = ../../src/Kal.bundle; sourceTree = SOURCE_ROOT; };
 		533B296B11E4A9AA00B3CC07 /* NativeCalAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NativeCalAppDelegate.h; sourceTree = "<group>"; };
@@ -67,6 +69,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				35C038031869322B00C90C4F /* CoreText.framework in Frameworks */,
 				1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */,
 				1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */,
 				288765FD0DF74451002DB57D /* CoreGraphics.framework in Frameworks */,
@@ -134,6 +137,7 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				35C038021869322B00C90C4F /* CoreText.framework */,
 				533B297E11E4B26E00B3CC07 /* EventKit.framework */,
 				533B298011E4B27600B3CC07 /* EventKitUI.framework */,
 				1DF5F4DF0D08C38300B7A737 /* UIKit.framework */,

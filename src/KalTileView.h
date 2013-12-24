@@ -12,23 +12,30 @@ typedef enum {
     KalTileTypeFirst     = 1 << 2,
     KalTileTypeLast      = 1 << 3,
     KalTileTypeDisable   = 1 << 4,
+    KalTileTypeMarked    = 1 << 5,
 } KalTileType;
+
+typedef enum {
+    KalTileStateNone = 0,
+    KalTileStateSelected,
+    KalTileStateHighlighted,
+    KalTileStateInRange,
+    KalTileStateLeftEnd,
+    KalTileStateRightEnd,
+} KalTileState;
 
 @interface KalTileView : UIView
 {
     CGPoint origin;
-    struct {
-        unsigned int selected : 1;
-        unsigned int highlighted : 1;
-        unsigned int marked : 1;
-    } flags;
 }
 
 @property (nonatomic, strong) NSDate *date;
-@property (nonatomic, getter=isHighlighted) BOOL highlighted;
-@property (nonatomic, getter=isSelected) BOOL selected;
-@property (nonatomic, getter=isMarked) BOOL marked;
+@property (nonatomic, assign) KalTileState state;
 @property (nonatomic, assign) KalTileType type;
+@property (nonatomic, getter = isMarked) BOOL marked;
+@property (nonatomic, getter = isToday) BOOL today;
+@property (nonatomic, getter = isFirst) BOOL first;
+@property (nonatomic, getter = isLast) BOOL last;
 
 - (void)resetState;
 - (BOOL)isToday;

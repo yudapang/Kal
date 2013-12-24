@@ -27,7 +27,7 @@
 //#define Single
 #ifdef Single
     kal = [[KalViewController alloc] initWithSelectionMode:KalSelectionModeSingle];
-    kal.selectedDate = [NSDate dateStartOfDay:[[NSDate date] offsetDay:30]];
+    kal.selectedDate = [NSDate dateStartOfDay:[[NSDate date] offsetDay:1]];
 #else
     kal = [[KalViewController alloc] initWithSelectionMode:KalSelectionModeRange];
     kal.beginDate = [NSDate dateStartOfDay:[NSDate date]];
@@ -44,7 +44,7 @@
     kal.delegate = self;
     dataSource = [[EventKitDataSource alloc] init];
     kal.dataSource = dataSource;
-    kal.minAvailableDate = [NSDate dateStartOfDay:[NSDate date]];
+    kal.minAvailableDate = [NSDate dateStartOfDay:[[NSDate date] offsetDay:-5]];
     kal.maxAVailableDate = [kal.minAvailableDate offsetDay:30];
     
     // Setup the navigation stack and display it.
