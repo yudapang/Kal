@@ -226,7 +226,7 @@ static NSString *kSlideAnimationId = @"KalSwitchMonths";
                 realEndDate = self.beginDate;
             }
             if ([(id)delegate respondsToSelector:@selector(didSelectBeginDate:endDate:)]) {
-                [delegate didSelectBeginDate:self.endDate endDate:self.beginDate];
+                [delegate didSelectBeginDate:realBeginDate endDate:realEndDate];
             }
         } else {
             if ([(id)delegate respondsToSelector:@selector(didSelectDate:)]) {

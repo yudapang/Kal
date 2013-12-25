@@ -142,12 +142,6 @@ extern const CGSize kTileSize;
 - (BOOL)isDisable { return self.type & KalTileTypeDisable; }
 - (BOOL)isMarked { return self.type & KalTileTypeMarked; }
 
-- (void)setToday:(BOOL)today { self.type = self.type | KalTileTypeToday; }
-- (void)setIsFirst:(BOOL)today { self.type = self.type | KalTileTypeToday; }
-- (void)setIsLast:(BOOL)today { self.type = self.type | KalTileTypeToday; }
-- (void)setIsDisable:(BOOL)today { self.type = self.type | KalTileTypeToday; }
-- (void)setIsMarked:(BOOL)today { self.type = self.type | KalTileTypeToday; }
-
 - (BOOL)belongsToAdjacentMonth { return self.type & KalTileTypeAdjacent; }
 
 @end
