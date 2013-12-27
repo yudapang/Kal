@@ -45,14 +45,18 @@ extern const CGSize kTileSize;
             tile.date = d;
             if ((minAvailableDate && [d compare:minAvailableDate] == NSOrderedAscending) || (maxAvailableDate && [d compare:maxAvailableDate] == NSOrderedDescending)) {
                 tile.type = KalTileTypeDisable;
-            } else if (i == 0 && j == 0) {
-                tile.type = KalTileTypeAdjacent | KalTileTypeFirst;
-            } else if (i == 2 && j == dates[i].count-1) {
-                tile.type = KalTileTypeAdjacent | KalTileTypeLast;
-            } else {
-                tile.type = dates[i] != mainDates
-                ? KalTileTypeAdjacent
-                : [d isToday] ? KalTileTypeToday : KalTileTypeRegular;
+            }
+            if (i == 0 && j == 0) {
+                tile.type |= KalTileTypeFirst;
+            }
+            if (i == 2 && j == dates[i].count-1) {
+                tile.type |= KalTileTypeLast;
+            }
+            if (dates[i] != mainDates) {
+                tile.type |= KalTileTypeAdjacent;
+            }
+            if ([d isToday]) {
+                tile.type |= KalTileTypeToday;
             }
             tileNum++;
         }
