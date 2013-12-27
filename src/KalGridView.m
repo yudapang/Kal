@@ -29,6 +29,9 @@ static NSString *kSlideAnimationId = @"KalSwitchMonths";
 @end
 
 @implementation KalGridView
+{
+    BOOL _needRemoveRanges;
+}
 
 - (void)setBeginDate:(NSDate *)beginDate
 {
@@ -84,10 +87,12 @@ static NSString *kSlideAnimationId = @"KalSwitchMonths";
 
 - (void)removeRanges
 {
-    for (KalTileView *tile in self.rangeTiles) {
-        tile.state = KalTileStateNone;
+    if (_needRemoveRanges) {
+        for (KalTileView *tile in self.rangeTiles) {
+            tile.state = KalTileStateNone;
+        }
+        [self.rangeTiles removeAllObjects];
     }
-    [self.rangeTiles removeAllObjects];
 }
 
 - (id)initWithFrame:(CGRect)frame logic:(KalLogic *)theLogic delegate:(id<KalViewDelegate>)theDelegate
@@ -103,6 +108,7 @@ static NSString *kSlideAnimationId = @"KalSwitchMonths";
     frame.size.width = 7 * kTileSize.width;
     
     if (self = [super initWithFrame:frame]) {
+        _needRemoveRanges = YES;
         self.clipsToBounds = YES;
         self.backgroundColor = [UIColor whiteColor];
         logic = theLogic;
@@ -296,10 +302,13 @@ static NSString *kSlideAnimationId = @"KalSwitchMonths";
     
     [self swapMonthsAndSlide:direction keepOneRow:keepOneRow];
     
-    if (self.selectionMode == KalSelectionModeSingle)
+    if (self.selectionMode == KalSelectionModeSingle) {
         self.beginDate = _beginDate;
-    else
+    } else {
+        _needRemoveRanges = NO;
         self.endDate = _endDate;
+        _needRemoveRanges = YES;
+    }
 }
 
 - (void)slideUp { [self slide:SLIDE_UP]; }
