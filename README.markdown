@@ -1,3 +1,12 @@
+Updated by Leon on 2013-12-27
+-----------------------------
+
+* update UI to IOS7 style
+* add range select 
+
+![ScrrenShot](https://raw.github.com/phaibin/Kal/master/ScreenShot.png)
+
+-----------------------------------------
 Kal - a calendar component for the iPhone
 -----------------------------------------
 ![](http://farm9.staticflickr.com/8308/7898361456_debb9e2695.jpg)
