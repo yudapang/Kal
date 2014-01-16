@@ -181,7 +181,7 @@ static NSString *kSlideAnimationId = @"KalSwitchMonths";
             return;
         
         NSDate *endDate = tile.date;
-        if ([endDate isEqualToDate:self.beginDate] || [endDate isEqualToDate:self.endDate])
+        if (!endDate || [endDate isEqualToDate:self.beginDate] || [endDate isEqualToDate:self.endDate])
             return;
         if (tile.isFirst || tile.isLast) {
             if ([tile.date compare:logic.baseDate] == NSOrderedDescending) {
