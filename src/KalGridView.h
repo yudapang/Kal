@@ -1,4 +1,4 @@
-/* 
+/*
  * Copyright (c) 2009 Keith Lazuka
  * License: http://www.opensource.org/licenses/mit-license.html
  */
@@ -25,10 +25,10 @@ typedef enum {
  */
 @interface KalGridView : UIView
 {
-  id<KalViewDelegate> delegate;  // Assigned.
-  KalLogic *logic;
-  KalMonthView *frontMonthView;
-  KalMonthView *backMonthView;
+    id<KalViewDelegate> delegate;  // Assigned.
+    KalLogic *logic;
+    KalMonthView *frontMonthView;
+    KalMonthView *backMonthView;
 }
 
 @property (nonatomic, assign) BOOL transitioning;
@@ -46,5 +46,6 @@ typedef enum {
 - (void)slideUp;
 - (void)slideDown;
 - (void)jumpToSelectedMonth;    // see comment on KalView
+- (void)clear;
 
 @end

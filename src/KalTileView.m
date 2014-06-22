@@ -58,9 +58,9 @@ extern const CGSize kTileSize;
         [image drawInRect:frame];
         textColor = [UIColor whiteColor];
     } else if (self.state == KalTileStateLeftEnd) {
-        UIImage *image = [UIImage imageNamed:@"Kal.bundle/kal_tile_range_left.png"];
+        UIImage *image = [UIImage imageNamed:@"Kal.bundle/zc_rent_date_start_tag.png"];
         if (self.isToday) {
-            image = [UIImage imageNamed:@"Kal.bundle/kal_tile_range_left_today.png"];
+            image = [UIImage imageNamed:@"Kal.bundle/zc_rent_date_today_start_tag.png"];
         }
         CGRect frame = CGRectMake(0, 0, image.size.width, image.size.height);
         frame.origin.x = (kTileSize.width - frame.size.width) / 2;
@@ -68,9 +68,9 @@ extern const CGSize kTileSize;
         [image drawInRect:frame];
         textColor = [UIColor whiteColor];
     } else if (self.state == KalTileStateRightEnd) {
-        UIImage *image = [UIImage imageNamed:@"Kal.bundle/kal_tile_range_right.png"];
+        UIImage *image = [UIImage imageNamed:@"Kal.bundle/zc_rent_date_end_tag.png"];
         if (self.isToday) {
-            image = [UIImage imageNamed:@"Kal.bundle/kal_tile_range_right_today.png"];
+            image = [UIImage imageNamed:@"Kal.bundle/zc_rent_date_end_today_tag.png"];
         }
         CGRect frame = CGRectMake(0, 0, image.size.width, image.size.height);
         frame.origin.x = (kTileSize.width - frame.size.width) / 2;
@@ -78,7 +78,7 @@ extern const CGSize kTileSize;
         [image drawInRect:frame];
         textColor = [UIColor whiteColor];
     } else if (self.state == KalTileStateInRange) {
-        UIImage *image = [UIImage imageNamed:@"Kal.bundle/kal_tile_range.png"];
+        UIImage *image = [UIImage imageNamed:@"Kal.bundle/zc_rent_date_range.png"];
         CGRect frame = CGRectMake(0, 0, image.size.width, image.size.height);
         frame.origin.y = (kTileSize.height - frame.size.height) / 2;
         textColor = kGrayColor;

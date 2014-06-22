@@ -13,6 +13,7 @@
 - (void)addSubviewsToHeaderView:(UIView *)headerView;
 - (void)addSubviewsToContentView:(UIView *)contentView;
 - (void)setHeaderTitleText:(NSString *)text;
+- (void)clearButtonClick;
 
 @end
 
@@ -143,13 +144,32 @@ static const CGFloat kMonthLabelHeight = 17.f;
     [self.gridView addObserver:self forKeyPath:@"frame" options:NSKeyValueObservingOptionNew context:NULL];
     [contentView addSubview:self.gridView];
     
+    self.clearButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    self.clearButton.frame = CGRectMake(60.0f, 300.0f, 100.0f, 50.0f);
+    self.clearButton.backgroundColor = [UIColor whiteColor];
+    [self.clearButton setTitle:@"清  除" forState:UIControlStateNormal];
+    [self.clearButton addTarget:self action:@selector(clearButtonClick) forControlEvents:UIControlEventTouchUpInside];
+    [contentView addSubview:self.clearButton];
+    
+    self.confirmButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    self.confirmButton.frame = CGRectMake(160.0f, 300.0f, 100.0f, 50.0f);
+    self.confirmButton.backgroundColor = [UIColor whiteColor];
+    [self.confirmButton setTitle:@"确  定" forState:UIControlStateNormal];
+    [contentView addSubview:self.confirmButton];
+    
+    
     // The list of events for the selected day
-    self.tableView = [[UITableView alloc] initWithFrame:fullWidthAutomaticLayoutFrame style:UITableViewStylePlain];
-    self.tableView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-    [contentView addSubview:self.tableView];
+    /* self.tableView = [[UITableView alloc] initWithFrame:fullWidthAutomaticLayoutFrame style:UITableViewStylePlain];
+     self.tableView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+     [contentView addSubview:self.tableView];*/
     
     // Trigger the initial KVO update to finish the contentView layout
     [self.gridView sizeToFit];
+}
+
+- (void)clearButtonClick
+{
+    [self.gridView clear];
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context

@@ -31,6 +31,13 @@ static NSString *kSlideAnimationId = @"KalSwitchMonths";
 @implementation KalGridView
 {
     BOOL _needRemoveRanges;
+    BOOL _isSingleDate;
+}
+
+- (void)clear
+{
+    self.beginDate = nil;
+    self.endDate = nil;
 }
 
 - (void)setBeginDate:(NSDate *)beginDate
@@ -108,6 +115,7 @@ static NSString *kSlideAnimationId = @"KalSwitchMonths";
     
     if (self = [super initWithFrame:frame]) {
         _needRemoveRanges = YES;
+        _isSingleDate = NO;
         self.clipsToBounds = YES;
         self.backgroundColor = [UIColor whiteColor];
         logic = theLogic;
@@ -145,13 +153,18 @@ static NSString *kSlideAnimationId = @"KalSwitchMonths";
     if (!hitView)
         return;
     
+    _isSingleDate = NO;
     if ([hitView isKindOfClass:[KalTileView class]]) {
         KalTileView *tile = (KalTileView*)hitView;
         if (tile.type & KalTileTypeDisable)
             return;
         
         NSDate *date = tile.date;
-        if ([date isEqualToDate:self.beginDate]) {
+        if (([date isEqualToDate:self.endDate]
+             || [date isEqualToDate:self.beginDate])
+            && self.beginDate && self.endDate){
+            _isSingleDate = YES;
+        } else if ([date isEqualToDate:self.beginDate]) {
             date = self.beginDate;
             _beginDate = _endDate;
             _endDate = date;
@@ -215,7 +228,8 @@ static NSString *kSlideAnimationId = @"KalSwitchMonths";
         }
         if (self.selectionMode == KalSelectionModeRange) {
             NSDate *endDate = tile.date;
-            if ([tile.date isEqualToDate:self.beginDate]) {
+            
+            if (!_isSingleDate && [tile.date isEqualToDate:self.beginDate]) {
                 if ([[endDate offsetDay:1] compare:self.maxAVailableDate] == NSOrderedDescending) {
                     endDate = [endDate offsetDay:-1];
                 } else {

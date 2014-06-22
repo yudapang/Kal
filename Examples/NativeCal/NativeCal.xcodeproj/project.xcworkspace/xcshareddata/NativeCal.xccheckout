@@ -5,34 +5,34 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
-	<string>2C3D53C5-BB06-4712-9063-FBE0EAE5CAC4</string>
+	<string>70F47408-92B9-46AE-9522-2D687414B32F</string>
 	<key>IDESourceControlProjectName</key>
 	<string>NativeCal</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>45B3182C-150C-43E3-AC8A-641A20D6D870</key>
-		<string>https://github.com/phaibin/Kal.git</string>
+		<key>5713D7E0-C4DE-4F5A-B251-5FCD88AF0E47</key>
+		<string>https://github.com/klazuka/Kal.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>Examples/NativeCal/NativeCal.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>45B3182C-150C-43E3-AC8A-641A20D6D870</key>
+		<key>5713D7E0-C4DE-4F5A-B251-5FCD88AF0E47</key>
 		<string>../../../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>https://github.com/phaibin/Kal.git</string>
+	<string>https://github.com/klazuka/Kal.git</string>
 	<key>IDESourceControlProjectVersion</key>
 	<integer>110</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>45B3182C-150C-43E3-AC8A-641A20D6D870</string>
+	<string>5713D7E0-C4DE-4F5A-B251-5FCD88AF0E47</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>45B3182C-150C-43E3-AC8A-641A20D6D870</string>
+			<string>5713D7E0-C4DE-4F5A-B251-5FCD88AF0E47</string>
 			<key>IDESourceControlWCCName</key>
 			<string>Kal</string>
 		</dict>
