@@ -41,3 +41,7 @@
 // whenever its content has changed. Kal uses this notification to
 // keep the UI in sync with the data source.
 extern NSString *const KalDataSourceChangedNotification;
+
+#define kDarkGrayColor       RGBCOLOR(51, 51, 51)
+#define kGrayColor           RGBCOLOR(153, 153, 153)
+#define kLightGrayColor      RGBCOLOR(185, 185, 185)

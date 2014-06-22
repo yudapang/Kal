@@ -7,6 +7,7 @@
 #import "KalGridView.h"
 #import "KalLogic.h"
 #import "KalPrivate.h"
+#import "Kal.h"
 
 @interface KalView ()
 

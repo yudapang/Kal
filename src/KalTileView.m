@@ -5,6 +5,7 @@
 
 #import "KalTileView.h"
 #import "KalPrivate.h"
+#import "Kal.h"
 #import <CoreText/CoreText.h>
 
 extern const CGSize kTileSize;

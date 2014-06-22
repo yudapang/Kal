@@ -38,6 +38,7 @@
  *       +-----------------------------------------+
  *
  */
+
 @interface KalView : UIView
 {
     UILabel *headerTitleLabel;
